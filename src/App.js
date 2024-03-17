@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch, useSelector } from "react-redux"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const initialState = {
+  entities:[],
 }
 
-export default App;
+export const reducer = (state = initialState, action) =>{
+  //console.log(state)
+  switch(action.type){
+    case 'todo/add':{
+      console.log('reducer')
+      return{
+        ...state,
+        entities:[{}]
+      }
+    }
+  }
+  return state
+}
+
+const App = () =>{
+  const dispatch = useDispatch()
+  const state = useSelector(x=>x)
+  console.log(state,'rendering')
+  return(
+    <div>
+      <form>
+        <input/>
+      </form>
+      <button onClick={()=>dispatch({type:'todo/add'})}>Mostrar todos</button>
+      <button>Completados</button>
+      <button>Incompletos</button>
+      <ul>
+        <li>todo 1</li>
+        <li>todo 2</li>
+      </ul>
+    </div>
+  )
+}
+
+export default App
